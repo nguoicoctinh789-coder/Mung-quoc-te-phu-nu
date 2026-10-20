@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sự thức giấc của Tiny 💜</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;color:white;text-align:center;
+ font-family:Arial,sans-serif;
+ background:radial-gradient(ellipse at top,#51428c,#242957 70%,#15182f);
+ overflow-x:hidden;
+}
+#stars{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.star{
+ position:absolute;color:#fff;opacity:.8;
+ animation:float 5s infinite ease-in-out;
+}
+@keyframes float{50%{transform:translateY(-25px);opacity:.35}}
+.page{
+ display:none;min-height:100vh;padding:65px 18px 30px;
+ align-items:center;justify-content:center;
+}
+.page.active{display:flex;animation:appear .8s}
+@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.card{
+ width:100%;max-width:440px;padding:28px 20px;
+ border:1px solid #ffffff40;border-radius:28px;
+ background:#ffffff12;box-shadow:0 15px 45px #090b2838;
+ backdrop-filter:blur(8px);
+}
+h1{font-size:29px;line-height:1.4}
+p{line-height:1.9;font-size:16px}
+.eyes{display:flex;justify-content:center;gap:25px;margin:20px}
+.eye{
+ width:22px;height:30px;background:white;border-radius:50%;
+ position:relative;animation:blink 4s infinite;
+}
+.eye:after{
+ content:"";position:absolute;left:7px;top:8px;
+ width:9px;height:13px;border-radius:50%;background:#29204f;
+}
+@keyframes blink{0%,44%,48%,100%{transform:scaleY(1)}46%{transform:scaleY(.1)}}
+button{
+ padding:13px 18px;margin:6px;border-radius:24px;
+ border:1px solid #ffffff70;color:white;background:#7965c8;
+ font-size:15px;cursor:pointer;
+}
+button:active{transform:scale(.96)}
+.note{
+ background:#ffffff12;border-radius:18px;padding:17px;line-height:1.9;
+}
+.tiny{font-size:48px;animation:bob 2s infinite ease-in-out}
+@keyframes bob{50%{transform:translateY(-10px) rotate(5deg)}}
+.garden{
+ height:240px;position:relative;overflow:hidden;
+ border-radius:20px;margin:20px 0;
+ background:linear-gradient(#272b5e,#62558d 75%,#31534c 75%);
+}
+.flower{
+ position:absolute;bottom:35px;font-size:34px;
+ transform-origin:bottom center;
+ animation:sway 2s infinite alternate ease-in-out;
+}
+@keyframes sway{to{transform:rotate(12deg) translateY(-5px)}}
+.flower:nth-child(2){animation-delay:.4s}
+.flower:nth-child(3){animation-delay:.8s}
+.flower:nth-child(4){animation-delay:.2s}
+.flower:nth-child(5){animation-delay:.6s}
+.flower:nth-child(6){animation-delay:1s}
+.petal{position:absolute;top:-30px;animation:fall 7s linear infinite}
+@keyframes fall{to{transform:translateY(300px) rotate(400deg)}}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<audio id="music" loop>
+ <source src="nhac.mp3" type="audio/mpeg">
+</audio>
+
+<section class="page active" id="p1">
+ <div class="card">
+  <div class="tiny">🌙</div>
+  <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+  <h1>Sự thức giấc của Tiny 💜</h1>
+  <p>Trong một khu vườn xanh tím, có một điều kỳ diệu đang chờ bạn.</p>
+  <p>Hôm nay, Tiny muốn dành cho bạn một món quà đặc biệt nhân ngày 20/10.</p>
+  <button onclick="start()">Đánh thức Tiny ✨</button>
+ </div>
+</section>
+
+<section class="page" id="p2">
+ <div class="card">
+  <div class="tiny">🪄</div>
+  <div class="eyes"><i class="eye"></i><i class="eye"></i></div>
+  <h1>Xin chào, bạn nhỏ! 💙</h1>
+  <p>Cuối cùng Tiny cũng tỉnh giấc rồi!</p>
+  <div class="note">Mình đã chuẩn bị những điều dễ thương nhất để gửi đến bạn. Cùng khám phá nhé!</div>
+  <button onclick="go(1)">← Quay lại</button>
+  <button onclick="go(3)">Khám phá tiếp →</button>
+ </div>
+</section>
+
+<section class="page" id="p3">
+ <div class="card">
+  <div class="tiny">💌</div>
+  <h1>Một lời nhắn dành cho bạn</h1>
+  <p>Hãy nhấn vào chiếc hộp quà để mở lời chúc nhé!</p>
+  <button onclick="message()">🎁 Mở quà</button>
+  <div class="note" id="msg">Bí mật nhỏ đang được giữ kín...</div>
+  <button onclick="go(2)">← Quay lại</button>
+  <button onclick="go(4)">Đến khu vườn →</button>
+ </div>
+</section>
+
+<section class="page" id="p4">
+ <div class="card">
+  <h1>Khu vườn tulip 🌷</h1>
+  <p>Món quà cuối cùng của Tiny dành cho bạn.</p>
+  <div class="garden">
+   <span class="flower" style="left:7%">🌷</span>
+   <span class="flower" style="left:22%">🌷</span>
+   <span class="flower" style="left:38%">🌷</span>
+   <span class="flower" style="left:54%">🌷</span>
+   <span class="flower" style="left:70%">🌷</span>
+   <span class="flower" style="left:85%">🌷</span>
+  </div>
+  <div class="note">
+   <h2>Chúc mừng ngày 20/10 💜</h2>
+   Chúc bạn luôn vui vẻ, bình an và tự tin.
+   Mong mọi ước mơ của bạn dần trở thành hiện thực,
+   mỗi ngày đều có người yêu thương và những điều tốt đẹp.
+   <p><b>Hãy luôn tỏa sáng theo cách riêng của mình! 🌷</b></p>
+  </div>
+  <button onclick="go(1)">↻ Bắt đầu lại</button>
+ </div>
+</section>
+
+<script>
+const music=document.getElementById("music");
+
+function start(){
+ music.play().catch(()=>{});
+ go(2);
+}
+function go(n){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById("p"+n).classList.add("active");
+ window.scrollTo(0,0);
+}
+function message(){
+ document.getElementById("msg").textContent=
+ "Chúc bạn có một ngày 20/10 thật rực rỡ! Mong bạn luôn được trân trọng, yêu thương và có thật nhiều niềm vui. 💜🌷";
+}
+for(let i=0;i<24;i++){
+ const s=document.createElement("span");
+ s.className="star";
+ s.textContent=i%3===0?"✦":"·";
+ s.style.left=Math.random()*100+"%";
+ s.style.top=Math.random()*100+"%";
+ s.style.animationDelay=Math.random()*5+"s";
+ s.style.fontSize=(10+Math.random()*18)+"px";
+ document.getElementById("stars").appendChild(s);
+}
+</script>
+</body>
+</html>
